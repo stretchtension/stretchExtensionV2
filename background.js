@@ -16,9 +16,3 @@ function showNotification(storedData) {
      }, function(notificationId) {});
   
 }
-
-chrome.app.runtime.onLaunched.addListener(launch);
-
-chrome.notifications.onClicked.addListener(function() {
-  launch();
-}); 
