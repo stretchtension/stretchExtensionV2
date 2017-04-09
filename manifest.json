@@ -1,7 +1,8 @@
 {
-  "name": "Event Page Example",
-  "description": "Demonstrates usage and features of the event page",
+  "name": "Strexercise",
+  "description": "Reminding you to exercise everyday.",
   "version": "1.0",
+
   "manifest_version": 2,
   "permissions": ["alarms", "tabs", "bookmarks", "notifications","declarativeWebRequest", "*://*/*"],
   "background": {

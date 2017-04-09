@@ -35,9 +35,9 @@ chrome.runtime.onMessage.addListener(function(msg, _, sendResponse) {
        });
        var newLabel;
        if (hasAlarm) {
-         newLabel = 'Cancel alarm';
+         newLabel = 'Pause Working';
        } else {
-         newLabel = 'Activate alarm';
+         newLabel = 'Start Working';
        }
        document.getElementById('toggleAlarm').innerText = newLabel;
        if (callback) callback(hasAlarm);
