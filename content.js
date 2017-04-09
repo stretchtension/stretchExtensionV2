@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener(function(msg, _, sendResponse) {
        });
        var newLabel;
        if (hasAlarm) {
-         newLabel = 'Pause Working';
+         newLabel = 'Stop Working';
        } else {
          newLabel = 'Start Working';
        }
