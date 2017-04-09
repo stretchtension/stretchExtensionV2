@@ -9,7 +9,7 @@
        });
        var newLabel;
        if (hasAlarm) {
-         newLabel = 'Pause Working';
+         newLabel = 'Stop Working';
        } else {
          newLabel = 'Start Working';
        }
