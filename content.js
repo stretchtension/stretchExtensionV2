@@ -1,33 +1,7 @@
-// Copyright (c) 2012 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-/*
-document.body.innerHTML = "";
 
-function addButton(name, cb) {
-  var a = document.createElement("button");
-  a.innerText = name;
-  a.onclick = cb;
-  document.body.appendChild(document.createElement("br"));
-  document.body.appendChild(a);
-}
-
-function log(str) {
-  console.log(str);
-}
-
-
-addButton("Set an alarm", function() {
-  chrome.runtime.sendMessage({setAlarm: true});
-});
-
-chrome.runtime.onMessage.addListener(function(msg, _, sendResponse) {
-  log("Got message from background page: " + msg);
-});
-*/
 (function () {
   //'use strict';
-   var alarmName = 'remindme';
+   var alarmName = 'stretchTime';
    function checkAlarm(callback) {
      chrome.alarms.getAll(function(alarms) {
        var hasAlarm = alarms.some(function(a) {
@@ -45,7 +19,7 @@ chrome.runtime.onMessage.addListener(function(msg, _, sendResponse) {
    }
    function createAlarm() {
      chrome.alarms.create(alarmName, {
-       delayInMinutes: 0.1, periodInMinutes: 0.1});
+       delayInMinutes: 15, periodInMinutes: 16});
    }
    function cancelAlarm() {
      chrome.alarms.clear(alarmName);
