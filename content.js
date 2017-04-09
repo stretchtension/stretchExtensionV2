@@ -1,7 +1,7 @@
 // Copyright (c) 2012 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-
+/*
 document.body.innerHTML = "";
 
 function addButton(name, cb) {
@@ -14,25 +14,8 @@ function addButton(name, cb) {
 
 function log(str) {
   console.log(str);
-  logDiv.innerHTML += str + "<br>";
 }
 
-addButton("Clear logs", function() {
-  logDiv.innerHTML = "";
-});
-
-addButton("Send message with delayed response", function() {
-  chrome.runtime.sendMessage({delayedResponse: true}, function(response) {
-    log("Background page responded: " + response);
-  });
-});
-
-addButton("Show counters", function() {
-  chrome.runtime.sendMessage({getCounters: true}, function(response) {
-    log("In-memory counter is: " + response.counter);
-    log("Persisted counter is: " + response.persistentCounter);
-  });
-});
 
 addButton("Set an alarm", function() {
   chrome.runtime.sendMessage({setAlarm: true});
@@ -41,10 +24,42 @@ addButton("Set an alarm", function() {
 chrome.runtime.onMessage.addListener(function(msg, _, sendResponse) {
   log("Got message from background page: " + msg);
 });
-
-var logDiv = document.createElement("div");
-logDiv.style.border = "1px dashed black";
-document.body.appendChild(document.createElement("br"));
-document.body.appendChild(logDiv);
-
-log("Ready.");
+*/
+(function () {
+  //'use strict';
+   var alarmName = 'remindme';
+   function checkAlarm(callback) {
+     chrome.alarms.getAll(function(alarms) {
+       var hasAlarm = alarms.some(function(a) {
+         return a.name == alarmName;
+       });
+       var newLabel;
+       if (hasAlarm) {
+         newLabel = 'Cancel alarm';
+       } else {
+         newLabel = 'Activate alarm';
+       }
+       document.getElementById('toggleAlarm').innerText = newLabel;
+       if (callback) callback(hasAlarm);
+     })
+   }
+   function createAlarm() {
+     chrome.alarms.create(alarmName, {
+       delayInMinutes: 0.1, periodInMinutes: 0.1});
+   }
+   function cancelAlarm() {
+     chrome.alarms.clear(alarmName);
+   }
+   function doToggleAlarm() {
+     checkAlarm( function(hasAlarm) {
+       if (hasAlarm) {
+         cancelAlarm();
+       } else {
+         createAlarm();
+       }
+       checkAlarm();
+     });
+   }
+  document.getElementById('toggleAlarm').addEventListener('click', doToggleAlarm);
+  checkAlarm();
+})();
