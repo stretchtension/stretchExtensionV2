@@ -11,8 +11,8 @@ function showNotification(storedData) {
     chrome.notifications.create('reminder', {
         type: 'basic',
         iconUrl: 'https://image.flaticon.com/icons/png/128/10/10699.png',
-        title: 'TAKE A BREAK',
-        message: 'Take a break and stretch your arms!'
+        title: 'TAKE A QUICK BREAK',
+        message: 'Take a quick 1 minute break and stretch your arms!'
      }, function(notificationId) {});
   
 }
